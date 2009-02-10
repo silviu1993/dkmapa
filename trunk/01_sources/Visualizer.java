@@ -54,6 +54,13 @@ public class Visualizer {
   public boolean showAbandonedVillages = true;
   public boolean autoRegenerateMap = true;
 
+  // double buffering like variables
+  private BufferedImage imageBuf;
+  private Graphics2D g;
+  private int oldw;
+  private int oldh;
+
+
   // tribepoints map variables
   public boolean doTribePointsMap = false;
   final int SQUARE_FOR_AVERAGE_SIZE = 20;
@@ -108,6 +115,8 @@ public class Visualizer {
   // constructor
   public Visualizer(MainWindow mw) {
     this.mainWindow = mw;
+
+    imageBuf=null; oldw=oldh=0;
 
     mapColors = new Color[mapColorsRGB.length];
     for(int i=0; i<mapColorsRGB.length; i++) {
@@ -641,7 +650,7 @@ public class Visualizer {
 
 
   // map repaint draws all
-  public void paintPanel(Graphics g) {
+  public void paintPanel(Graphics g2) {
     int w, h;
     int wCount, hCount;
     int x0p, y0p;
@@ -651,6 +660,17 @@ public class Visualizer {
     }
     w = mainWindow.mapPanel.getWidth();
     h = mainWindow.mapPanel.getHeight();
+
+    // new double budder only if not exist or if w/h changes (reduce alloc to speet up)
+    if((imageBuf == null) || (oldw!=w) || (oldh!=h)){
+     imageBuf = new BufferedImage(w,h,BufferedImage.TYPE_INT_ARGB);
+     g = imageBuf.createGraphics();
+     oldw=w; oldh=h;
+    }
+    g.setColor(mapColors[VILLAGE_NO]);
+    g.fillRect(0,0,w,h);
+
+
     wCount = (w / mapSquareSize) + 1;
     hCount = (h / mapSquareSize) + 1;
     x0p = mapSquareSize - (x0 % mapSquareSize);
@@ -705,6 +725,7 @@ public class Visualizer {
         }
       }
     }
+    g2.drawImage(imageBuf,0,0,w,h,null); // flip image from memory buffer to screeen
 
   }
 
