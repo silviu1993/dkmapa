@@ -1,21 +1,76 @@
 /*
- *
- * Application window class
- *
- * (c)2008-2009, Jiri Svoboda
- * this code is under GNU GPL v3 license
- *
+
+    DKMapa is program for world data visualization for Tribal Wars game.
+    Copyright (C) 2008-2009, Jiri Svoboda
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
  */
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import java.io.*;
-import java.util.*;
+import java.awt.AWTEvent;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JProgressBar;
+import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
+/**
+ * Application window class
+ * 
+ * @author Jiri Svoboda (http://jirkasuv.duch.cz/)
+ */
 public class MainWindow extends JFrame {
+    
+    /** Eclipse generated UID */
+    private static final long serialVersionUID = -5031349380702441389L;
+
   Visualizer visualizer;
   DataSourcesWindow dsw;
   MoveMapToCoordsWindow mmtc;
@@ -545,17 +600,17 @@ public class MainWindow extends JFrame {
       Object sourceComponent = evt.getSource();
       // mouse entered on info about village/tribe/ally
       if ((sourceComponent == villageInfoLabel1) && (visualizer.selectedVillageId != 0)) {
-        setCursor(Cursor.HAND_CURSOR);
+        setCursor(Cursor.HAND_CURSOR); // TODO (Betlista): replace deprecated method
       }
       if ((sourceComponent == tribeInfoLabel1) && (visualizer.selectedTribeId != 0)) {
-        setCursor(Cursor.HAND_CURSOR);
+        setCursor(Cursor.HAND_CURSOR); // TODO (Betlista): replace deprecated method
       }
       if ((sourceComponent == allyInfoLabel1) && (visualizer.selectedAllyId != 0)) {
-        setCursor(Cursor.HAND_CURSOR);
+        setCursor(Cursor.HAND_CURSOR); // TODO (Betlista): replace deprecated method
       }
     }
     public void mouseExited(MouseEvent evt) {
-      setCursor(Cursor.DEFAULT_CURSOR);
+      setCursor(Cursor.DEFAULT_CURSOR);  // TODO (Betlista): replace deprecated method
     }
   }
 
@@ -847,6 +902,10 @@ public class MainWindow extends JFrame {
  */
 
   public class JLabelPreview extends JLabel {
+
+    /** Eclipse generated UID */
+    private static final long serialVersionUID = 842381343872014704L;
+
     // constructor
     public JLabelPreview() {
       super();
@@ -865,6 +924,10 @@ public class MainWindow extends JFrame {
  */
 
   public class JPanelMap extends JPanel {
+
+    /** Eclipse generated UID */
+    private static final long serialVersionUID = 3032788952212334234L;
+
     // constructor
     public JPanelMap() {
       super();

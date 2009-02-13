@@ -1,19 +1,46 @@
 /*
- *
- * "Move map to coords..." dialog class
- *
- * (c)2008-2009, Jiri Svoboda
- * this code is under GNU GPL v3 license
- *
+
+    DKMapa is program for world data visualization for Tribal Wars game.
+    Copyright (C) 2008-2009, Jiri Svoboda
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
  */
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.border.*;
+import java.awt.AWTEvent;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
+/**
+ * "Move map to coords..." dialog class
+ * 
+ * @author Jiri Svoboda (http://jirkasuv.duch.cz/)
+ */
 public class MoveMapToCoordsWindow extends JDialog {
+
+    /** Eclipse generated UID */
+    private static final long serialVersionUID = -7419162124976240378L;
+
   Visualizer visualizer;
   // GUI variables
   private JPanel mainPanel;

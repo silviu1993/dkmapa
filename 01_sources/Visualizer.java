@@ -1,10 +1,21 @@
 /*
- *
- * Visualization class
- *
- * (c)2008-2009, Jiri Svoboda
- * this code is under GNU GPL v3 license
- *
+
+    DKMapa is program for world data visualization for Tribal Wars game.
+    Copyright (C) 2008-2009, Jiri Svoboda
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
  */
 
 import java.util.ArrayList;
@@ -13,8 +24,13 @@ import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
 
-
+/**
+ * Visualization class
+ * 
+ * @author Jiri Svoboda (http://jirkasuv.duch.cz/)
+ */
 public class Visualizer {
+
   private MainWindow mainWindow;
   public World world;
 
@@ -281,7 +297,7 @@ public class Visualizer {
   // generate bitmaps in worker thread
   public void generateBitmapsWithProgress() {
     //mainWindow.setCursor(Cursor.WAIT_CURSOR);
-    SwingWorker sw = new SwingWorker() {
+    SwingWorker<Object, Object> sw = new SwingWorker<Object, Object>() {
       public Object doInBackground() {
         setWorking(true);
         generateBitmaps();
@@ -593,7 +609,7 @@ public class Visualizer {
 
   // get points of village and return appropriate color
   public int getVillagePointsLevel(int coords) {
-    String[] values;
+//    String[] values;
     int tribePoints, averageTribePoints;
     int diff, diffAbs;
     int i;
@@ -601,7 +617,7 @@ public class Visualizer {
     if (tribePointsBitmap[coords] == 0) {
       return VILLAGE_NO;
     }
-    values = world.getFullVillageInfo(coords);
+//    values = world.getFullVillageInfo(coords);
     tribePoints = tribePointsBitmap[coords];
     averageTribePoints = tribePointsLocalAveragesBitmap[coords];
     diff = tribePoints - averageTribePoints;
@@ -973,7 +989,7 @@ public class Visualizer {
   public void setVillagePointsMap() {
     doTribePointsMap = mainWindow.tribePointsMapMenuItem.getState();
     //generateBitmaps(); // DEBUG
-    SwingWorker sw = new SwingWorker() {
+    SwingWorker<Object, Object> sw = new SwingWorker<Object, Object>() {
       public Object doInBackground() {
         setWorking(true);
         generateBitmaps();

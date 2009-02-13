@@ -1,23 +1,60 @@
 /*
- *
- * Data sources window class
- * (worlds data selection and update)
- *
- * (c)2008-2009, Jiri Svoboda
- * this code is under GNU GPL v3 license
- *
+
+    DKMapa is program for world data visualization for Tribal Wars game.
+    Copyright (C) 2008-2009, Jiri Svoboda
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
  */
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import java.io.*;
-import java.util.*;
+import java.awt.AWTEvent;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingWorker;
+import javax.swing.border.EmptyBorder;
 
+/**
+ * Data sources window class
+ * (worlds data selection and update)
+ * 
+ * @author Jiri Svoboda (http://jirkasuv.duch.cz/)
+ */
 public class DataSourcesWindow extends JDialog {
-  Visualizer visualizer;
+
+    /** Eclipse generated UID */
+    private static final long serialVersionUID = -5597998519112189759L;
+
+Visualizer visualizer;
 
   final String WORLDSLIST_FILENAME = "worlds.dat";
   File wlFile;
@@ -157,7 +194,7 @@ public class DataSourcesWindow extends JDialog {
     if (currentWorld == -1) {
       return;
     }
-    SwingWorker sw = new SwingWorker() {
+    SwingWorker<Object, Object> sw = new SwingWorker<Object, Object>() {
       public Object doInBackground() {
         isWorking = true;
         updateButton.setEnabled(false);
@@ -185,7 +222,7 @@ public class DataSourcesWindow extends JDialog {
     values = worldsList.get(currentWorld).getFullRow();
     final World w = new World(values[I_WORLDNAME], values[I_ADDRESS], Float.parseFloat(values[I_SPEED].trim()), Float.parseFloat(values[I_UNITSPEED]), this);
 
-    SwingWorker sw = new SwingWorker() {
+    SwingWorker<Object, Object> sw = new SwingWorker<Object, Object>() {
       public Object doInBackground() {
         isWorking = true;
         updateButton.setEnabled(false);
@@ -321,9 +358,12 @@ public class DataSourcesWindow extends JDialog {
 
 
   public class WorldsListTableModel extends javax.swing.table.AbstractTableModel {
+
+    /** Eclipse generated UID */
+    private static final long serialVersionUID = -7914838123756093401L;
+
     final int COLUMN_COUNT = 5;
     Object[][] tableData = { };
-
 
     public int getColumnCount() {
       return COLUMN_COUNT;
