@@ -1,20 +1,54 @@
 /*
- *
- * "About..." dialog class
- *
- * (c)2008-2009, Jiri Svoboda
- * this code is under GNU GPL v3 license
- *
+
+    DKMapa is program for world data visualization for Tribal Wars game.
+    Copyright (C) 2008-2009, Jiri Svoboda
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
  */
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.border.*;
+import java.awt.AWTEvent;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
+/**
+ * "About..." dialog class
+ * 
+ * @author Jiri Svoboda (http://jirkasuv.duch.cz/)
+ */
 public class AboutWindow extends JDialog {
-  // GUI variables
+    
+    
+    /** Eclipse generated UID */
+    private static final long serialVersionUID = -2672519966307126786L;
+
+// GUI variables
   private JPanel mainPanel;
   private JPanel leftPanel;
     private JLabel imageLabel;

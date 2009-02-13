@@ -1,10 +1,21 @@
 /*
- *
- * World data class
- *
- * (c)2008-2009, Jiri Svoboda
- * this code is under GNU GPL v3 license
- *
+
+    DKMapa is program for world data visualization for Tribal Wars game.
+    Copyright (C) 2008-2009, Jiri Svoboda
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
  */
 
 import java.net.*;
@@ -16,7 +27,11 @@ import java.util.Set;
 import java.util.Date;
 import java.text.DateFormat;
 
-
+/**
+ * World data class
+ * 
+ * @author Jiri Svoboda (http://jirkasuv.duch.cz/)
+ */
 public class World {
   String name;
   String address;
@@ -167,6 +182,8 @@ public class World {
     ally = null;
     tribe = null;
     village = null;
+    
+    System.gc();
   }
 
 
@@ -238,10 +255,16 @@ public class World {
     final int I_ORIG_ID = 0;
     final int I_ORIG_NAME = 1;
     final int I_ORIG_TAG = 2;
+
+    @SuppressWarnings("unused")
     final int I_ORIG_MEMBERS = 3;
+    @SuppressWarnings("unused")
     final int I_ORIG_VILLAGES = 4;
+    @SuppressWarnings("unused")
     final int I_ORIG_POINTS = 5;
+    @SuppressWarnings("unused")
     final int I_ORIG_ALL_POINTS = 6;
+    @SuppressWarnings("unused")
     final int I_ORIG_RANK = 7;
 
     BufferedReader in = new BufferedReader(new FileReader(getAllyFile()));
@@ -271,6 +294,8 @@ public class World {
     final int I_ORIG_ALLY = 2;
     final int I_ORIG_VILLAGES = 3;
     final int I_ORIG_POINTS = 4;
+
+    @SuppressWarnings("unused")
     final int I_ORIG_RANK = 5;
 
     BufferedReader in = new BufferedReader(new FileReader(getTribeFile()));
@@ -300,6 +325,8 @@ public class World {
     int I_ORIG_Y = 3;
     int I_ORIG_TRIBE = 4;
     int I_ORIG_POINTS = 5;
+
+    @SuppressWarnings("unused")
     int I_ORIG_BONUS = 6;
 
     BufferedReader in = new BufferedReader(new FileReader(getVillageFile()));
@@ -387,7 +414,7 @@ public class World {
 
   // return coordinates of the village entered by coordinates :-)
   public int findVillageId(int coords) {
-    int x, y;
+//    int x, y;
 
     if (village.containsKey(coords)) {
       return coords;
