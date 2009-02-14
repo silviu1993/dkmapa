@@ -9,7 +9,7 @@ Na tejto stránke sa dozviete ako je možné prispieť do projktu DKMapa.
 = Postup =
 
 == Stiahnutie zdrojákov ==
-Ak chcete vyvíjať v Eclipse'e, tak Vám odporúčam najprv si prečítať stránku [Sk_Ako_pripraviť_projekt_v_Eclipse Sk_Ako_pripraviť_projekt_v_Eclipse].
+Ak chcete vyvíjať v Eclipse'e, tak Vám odporúčam najprv si prečítať stránku [Sk_Ako_pripravit_projekt_v_Eclipse].
 
 Najprv je nutné stiahnuť si zdrojové súbory.<br>
 Toto je možné dosiahnuť tým, že si ich vytiahnete z SVN'ka:<br>
