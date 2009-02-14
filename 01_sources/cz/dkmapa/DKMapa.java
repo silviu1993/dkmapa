@@ -1,4 +1,3 @@
-package cz.dkmapa;
 /*
 
     DKMapa is program for world data visualization for Tribal Wars game.
@@ -19,40 +18,145 @@ package cz.dkmapa;
 
  */
 
-import javax.swing.ToolTipManager;
-import javax.swing.UIManager;
+package cz.dkmapa;
 
 /**
- * Main class of the application
+ * Main class of the application - contains {@link #main(String[])} method
+ * where execution starts.
  * 
  * @author Jiri Svoboda (http://jirkasuv.duch.cz/)
+ * @author Martin 'Betlista' Šuška (http://betlista.net) - version > 1.0
+ * 
+ * @see {@link #main(String[])} for further details
  */
 public class DKMapa {
 
-  // main
-  public static void main (String[] args) {
-    int startingWorld;
+    /**
+     * Used internally in this class to save value of <code>-w</code>
+     * or <code>-world</code> parameter, which is later passed
+     * to {@link MainWindow#MainWindow(int) MainWindow(int)} constructor.
+     * 
+     *  @see {@link MainWindow#MainWindow(int)} for details
+     */
+    private static int worldNumber;
 
+    /** 
+     * Defines if program is running in verbose mode.
+     * If value of this attribute is needed in program use
+     * {@link #isInVerboseMode()} method.
+     * 
+     * @see {@link #isInVerboseMode()} for retrieving information about
+     * verbose mode setting
+     */
+    private static boolean verbose = false;
 
-    try {
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    }
-    catch(Exception e) {
-      e.printStackTrace();
-    }
-    Messages.setLanguage(System.getProperty("user.language"));
-    //Messages.setLanguage("cs");
-    ToolTipManager.sharedInstance().setInitialDelay(250);
-    ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);
-
-    try {
-      startingWorld = Integer.parseInt(args[0]);
-    }
-    catch(Exception e) {
-      startingWorld = 0;
+    /**
+     * Defines if verbose mode option was requesed.
+     * 
+     * @return <code>true</code> if <code>-v</code>
+     * or <code>--verbose</code> parameter was present
+     */
+    public static boolean isInVerboseMode() {
+        return verbose;
     }
 
-    new MainWindow(startingWorld);
-  }
+    /**
+     * 
+     * @param prefixes array of possible prefixes
+     * @param argument argument to compare with
+     * @return
+     */
+    private static String getArgumentValue( final String[] prefixes, final String argument) {
+        for ( String prefix : prefixes ) {
+            if ( argument.startsWith(prefix) ) {
+                return argument.substring( prefix.length() ).trim();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Method recognizes program arguments.
+     * 
+     * These arguments are available:
+     * <dl>
+     * <dt>-v, --verbose</dt>
+     * <dd>all debug messages will be printed to the console</dd>
+     * <dt>-l, --lang</dt>
+     * <dd>program language. If it is not set java property
+     * <code>user.language</code> is used and appropriate resource bundle
+     * is used</dd>
+     * <dt>-w, --world</dt>
+     * <dd><u>number</u> to specify which world should be loaded immediately
+     * after start</dd>
+     * </dl>
+     */
+    private static void recognizeArguments( final String[] args) {
+        String value;
+        String language = System.getProperty( "user.language" );
+        for ( String argument : args ) {
+              // verbose argument check
+            if ( argument.startsWith("-v") ) {
+                value = getArgumentValue(
+                            new String[] {"--verbose", "-v"},
+                            argument
+                        );
+                if ( value != null ) {
+                    verbose = true;
+                    System.out.println("verbose option is on");
+                }
+            }
+              // language argument check
+            if ( argument.startsWith("-l") ) {
+                value = getArgumentValue(
+                            new String[] {"--lang=", "-l="},
+                            argument
+                        );
+                if ( value != null ) {
+                    language = value;
+                }
+            }
+              // world argument check
+            if ( argument.startsWith("-w") ) {
+                value = getArgumentValue(
+                            new String[] {"--world=", "-w="},
+                            argument
+                        );
+                if ( value != null ) {
+                    try {
+                        worldNumber = Integer.parseInt( value );
+                    } catch (NumberFormatException nfe) {
+                          // TODO (Betlista): add some debug/log printing
+                          if ( isInVerboseMode() ) System.out.println("unable to convert '" + value + "' to integer"); 
+                        worldNumber = 0;
+                    }
+                }
+            }
+        } // for loop end
+
+          if (isInVerboseMode()) System.out.println( "language: " + language);
+        Messages.setLanguage( language );
+    }
+
+    /**
+     * <p>
+     * Method recognizes program parameters and shows main application window.
+     * </p>
+     * <p>
+     * Program should be started as:<br>
+     * <code>java cz.dkmapa.DKMapa [-v|--verbose] [-l=|--lang=<language>] [-w=|--world=<worldNumber>]</code><br>
+     * example:<br>
+     * <code>java cz.dkmapa.DKMapa -v --l=cz</code>
+     * </p>
+     * 
+     * @param args program arguments
+     * @see {@link #getArgumentValue(String[], String)} for more details about
+     * parameters processing
+     */
+    public static void main(String[] args) {
+        recognizeArguments(args);
+
+        new MainWindow( worldNumber );
+    }
 
 }

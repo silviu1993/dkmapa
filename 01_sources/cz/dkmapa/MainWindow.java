@@ -60,6 +60,8 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.ToolTipManager;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -159,6 +161,14 @@ public class MainWindow extends JFrame {
 
   // constructor
   public MainWindow(int startingWorld) {
+      try {
+          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+      ToolTipManager.sharedInstance().setInitialDelay(250);
+      ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);
+
     visualizer = new Visualizer(this);
     try {
       initComponents();
