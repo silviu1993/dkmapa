@@ -1,0 +1,9 @@
+#summary Úvodná stránka k projektu DKMapa
+#labels SK,Featured
+
+Vitajte na stránkach projektu DKMapa!
+
+(stránky sa ešte len chystajú)
+
+Odkazy:
+* [En_Overview this page is available also in english]
