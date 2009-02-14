@@ -1,3 +1,4 @@
+package cz.dkmapa;
 /*
 
     DKMapa is program for world data visualization for Tribal Wars game.
@@ -18,41 +19,40 @@
 
  */
 
-import java.io.Serializable;
+import javax.swing.ToolTipManager;
+import javax.swing.UIManager;
 
 /**
- * Item of the selection lists class
+ * Main class of the application
  * 
  * @author Jiri Svoboda (http://jirkasuv.duch.cz/)
  */
-public class ListItem implements Serializable {
+public class DKMapa {
 
-  /** Eclipse generated serialVersionUID */
-  private static final long serialVersionUID = 1451020259157374898L;
-  
-  int itemId;
-  int itemColorIndex;
+  // main
+  public static void main (String[] args) {
+    int startingWorld;
 
 
-  // constructor
-  public ListItem(int id, int color) {
-    this.itemId = id;
-    this.itemColorIndex = color;
-  }
+    try {
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+    Messages.setLanguage(System.getProperty("user.language"));
+    //Messages.setLanguage("cs");
+    ToolTipManager.sharedInstance().setInitialDelay(250);
+    ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);
 
+    try {
+      startingWorld = Integer.parseInt(args[0]);
+    }
+    catch(Exception e) {
+      startingWorld = 0;
+    }
 
-  public int getId() {
-    return this.itemId;
-  }
-
-
-  public int getColorIndex() {
-    return this.itemColorIndex;
-  }
-
-
-  public void setColorIndex(int color) {
-    this.itemColorIndex = color;
+    new MainWindow(startingWorld);
   }
 
 }
