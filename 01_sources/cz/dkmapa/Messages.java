@@ -1,3 +1,4 @@
+package cz.dkmapa;
 /*
 
     DKMapa is program for world data visualization for Tribal Wars game.
